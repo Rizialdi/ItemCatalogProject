@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, url_for, request, redirect
 from collections import OrderedDict # import pour etre capable de generer un dictionnaire ordonne
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
@@ -54,16 +54,35 @@ def showItemDescriptionLog(categorie, item):
     return render_template('itemDescriptionLog.html',categories = categories, cat = cat, item = item)
 
 # Show the form for writing one Item an show its Categorie
-@app.route('/catalog/<string:item>/edit')
+@app.route('/catalog/<string:item>/edit', methods=['GET', 'POST'])
 def showItemEdit(item):
     item = session.query(Item).filter_by(name = item).one()
     categories = session.query(Category).order_by(Category.name)
-    return render_template('itemEditionPage.html', item = item, categories = categories)
+    category = session.query(Category).filter_by(id = item.category_id).one()
+    #Ne pas essayer de definir la category de lelement a modifier car on fait un update et non un create
+    if request.method == 'POST':
+        if request.form['name']:
+            item.name = request.form['name']
+        if request.form['description']:
+            item.description = request.form['description']     
+        session.add(item)
+        session.commit()
+        return redirect(url_for('showItems', elm = category.name))
+    else:
+        return render_template('itemEditionPage.html', item = item, categories = categories)
 
 # Show the confirmation for deleting one Item an show its Categorie
-@app.route('/catalog/<string:item>/delete')
+@app.route('/catalog/<string:item>/delete', methods=['GET', 'POST'])
 def showItemDelete(item):
-    return render_template('itemDeletionPage.html')
+    item = session.query(Item).filter_by(name = item).one()
+    categories = session.query(Category).order_by(Category.name)
+    category = session.query(Category).filter_by(id = item.category_id).one()
+    if request.method == 'POST':
+        session.delete(item)
+        session.commit()
+        return redirect(url_for('showItems', elm = category.name))
+    else:
+        return render_template('itemDeletionPage.html')
 
 
 if __name__ == '__main__':
