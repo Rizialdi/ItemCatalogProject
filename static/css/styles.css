@@ -1,0 +1,15 @@
+#bar_nav ul{
+	list-style-type:none; 
+}
+
+* {
+	font-family:Roboto;
+	font-weight:bold;
+}
+
+a{
+	color:black;
+}
+li{
+	list-style-type:none;
+}

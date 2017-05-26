@@ -1,0 +1,13 @@
+<nav id="bar_nav">
+<h1><a href="{{url_for('showCatalog')}}">Categories</a></h1>
+	<ul>
+		<!-- Jai essaye de faire <li><a></a></li> mais trop d'erreur et plus simple, de prendre <a><li></li></a> -->
+		{% for category in categories%}
+		<a href="{{url_for('showItems', elm = category.name)}}">
+		<li>{{category.name}}</li>
+		</a>
+		{% endfor %}
+	</ul>
+
+
+</nav>

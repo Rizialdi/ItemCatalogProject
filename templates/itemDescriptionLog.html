@@ -1,0 +1,17 @@
+{% extends "main.html" %}
+{% block content %}
+<div class="container">
+		<div class="row"> 
+			<div class="col-sm-3">
+				{% include "side_menu.html" %}
+			</div>
+			<div class="col-sm-9">
+			{%if item%}
+				<h1>{{item.name}}</h1>
+					{{item.description }} </br>
+					<a href="{{url_for('showItemEdit', item = item.name)}}">Edit</a> |
+					<a href="{{url_for('showItemDelete', item = item.name)}}">Delete</a>
+			{% endif%}
+			</div>
+</div>
+{% endblock %}

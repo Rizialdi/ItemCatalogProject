@@ -1,0 +1,27 @@
+{% extends "main.html" %}
+{% block content %}
+<div class="container">
+	<div class="row"> 
+		<h1>Edit Item</h1>
+		<form action = "#" method= "POST">
+			<label for="name">Title</label>
+			<input type="text" name="name" value="{{item.name}}" required><br>
+
+			<label for="description">Description</label>
+			<textarea name="description" maxlength="250" rows="3" required>{{item.description}}</textarea><br>
+
+			{%if categories%}
+				<label for="category">Category</label>
+				  <select name="category">
+				    {%for cat in categories%}
+				    	<option value="{{cat.name}}">{{cat.name}}</option>
+				    {%endfor%}
+				  </select>
+			{%endif%}
+			<br><br>
+			<input type="submit" value="Just click it !!!">
+		</form>
+		<br>
+		<a href="{{url_for('showCatalog')}}">Back to main Page</a>
+	</div>
+{% endblock %}

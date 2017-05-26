@@ -1,0 +1,13 @@
+{% extends "main.html" %}
+{% block content %}
+<div class="container">
+	<div class="row"> 		
+		<h1>Delete Item</h1>
+		<form action="#" method="POST">
+			Are you sure you want to delete  ? <br>
+			<input type="submit" value="Yes, really want to Delete">
+		</form>
+		<br>
+		<a href="{{url_for('showCatalog')}}">Back to main Page</a>
+	</div>
+{% endblock %}

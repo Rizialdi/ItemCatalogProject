@@ -1,0 +1,21 @@
+{% extends "main.html" %}
+{% block content %}
+<div class="container">
+		<div class="row"> 
+			<div class="col-sm-3">
+				{% include "side_menu.html" %}
+			</div>
+			<div class="col-sm-9">
+			{%if latestItems%}
+				<h1>Latest Items</h1>
+				<ul>
+					{% for key, value in dict.items()%}
+					<a href="{{url_for('showItemDescription', categorie = value.name, item = key.name)}}">
+			     	 <li>{{ key.name + " ( " + value.name + " )" }}</li>
+			     	 </a>
+					{% endfor %}
+				</ul>
+			{% endif%}
+			</div>
+</div>
+{% endblock %}

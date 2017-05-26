@@ -5,7 +5,7 @@ from sqlalchemy import create_engine
  
 Base = declarative_base()
 
-class Category(Base):
+class Category(Base): 
     __tablename__ = 'category'
    
     id = Column(Integer, primary_key=True)

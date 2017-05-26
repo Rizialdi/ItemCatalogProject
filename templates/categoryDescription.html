@@ -1,0 +1,18 @@
+{% extends "main.html" %}
+{% block content %}
+<div class="container">
+		<div class="row"> 
+			<div class="col-sm-3">
+				{% include "side_menu.html" %}
+			</div>
+			<div class="col-sm-9">
+			{%if element%}
+				<h1>{{element.name + " Items " + " ( " + nbr_items + " items )"}}</h1>
+				 {%for item in items%}
+				 <a href="{{url_for('showItemDescription', categorie = element.name, item = item.name)}}">
+				 {{item.name}} </br>
+				 {% endfor %}
+			{% endif%}
+			</div>
+</div>
+{% endblock %}
