@@ -1,0 +1,7 @@
+{% extends "main.html" %}
+{% block content %}
+{% if not session['logged_in'] %}
+<p>You're now logged out!</p>
+{% else %}
+{% endif %}
+{% endblock %}

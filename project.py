@@ -1,8 +1,10 @@
-from flask import Flask, render_template, url_for, request, redirect
+from flask import Flask, render_template, url_for, request, redirect, session as sess
+#when importing session as sess we must set the secret_key on the application to something unique and secret
 from collections import OrderedDict # import pour etre capable de generer un dictionnaire ordonne
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from database_setup import Category, Base, Item
+from database_setup import *
+import os
  
 engine = create_engine('sqlite:///categorymenu.db')
 Base.metadata.bind = engine
@@ -85,6 +87,68 @@ def showItemDelete(item):
         return render_template('itemDeletionPage.html')
 
 
+################################################################################################################
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def new_user():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        if username is None or password is None:
+            error_message = "missing arguments"
+            return render_template('signin.html', error_message =  error_message)
+            
+        if session.query(User).filter_by(username = username).first() is not None:
+            error_message = "existing user"
+            return render_template('signin.html', error_message =  error_message) #in these error cases return blank form
+            
+        user = User(username = username)
+        user.hash_password(password)
+        session.add(user)
+        session.commit()
+        #in this case redirect the newly created user to sign up page
+        return redirect(url_for('signup_user', usrname = username))
+    else:
+        return render_template('signin.html')  #in this case return only a blank form
+
+@app.route('/logout', methods=['GET', 'POST'])
+def logout_user():
+    sess['logged_in'] = False
+    return render_template('logout.html')
+
+@app.route('/signup', methods=['GET', 'POST'])
+def signup_user():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        #by using <required> in <input> <tag>, we can remove this part
+        if username is None or password is None:
+            error_message =  "missing arguments"
+            return render_template('signup.html', error_message = error_message)  #in this case return only a blank form
+
+        user_object = session.query(User).filter_by(username = username).first() 
+        if user_object is not None and user_object.verify_password(password):
+            sess['logged_in'] = True
+            return redirect(url_for('showCatalog'))
+        else:
+            error_message = "User/Pwd not find in database... Try again or go to Login Page"
+            return render_template('signup.html', error_message = error_message)
+    else:
+        return render_template('signup.html', usrname = request.args.get('usrname'))  #in this case return only a blank form
+
+@app.route('/user')
+def user():
+    user = session.query(User).all()
+    output = ''
+    for u in user:
+        output += u.username
+        output += '</br>'
+        output += u.password_hash
+        output += '</br>'
+    return output
+
 if __name__ == '__main__':
+    app.secret_key = os.urandom(12)
     app.debug = True
     app.run(host='0.0.0.0', port=5000)

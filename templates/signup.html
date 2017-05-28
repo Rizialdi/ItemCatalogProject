@@ -1,0 +1,43 @@
+{% extends "main.html" %}
+{% block content %}
+{% if session['logged_in'] %}
+<p>You're logged in already!</p>
+{% else %}
+ 
+ 
+<form action="/signup" method="POST">
+<!-- <form action="#" method="POST"> -->
+	<div class="login">
+		<div class="login-screen">
+			<div class="app-title">
+				<h1>Sign Up</h1>
+			</div>
+ 
+			<div class="login-form">
+				<div class="control-group">
+				{%if usrname%}
+				<input type="text" class="login-field" value="{{usrname}}" placeholder="username" name="username" required>
+				{%else%}
+				<input type="text" class="login-field" value="" placeholder="username" name="username" required>
+				{%endif%}
+				<label class="login-field-icon fui-user" for="login-name"></label>
+				</div>
+ 
+				<div class="control-group">
+				<input type="password" class="login-field" value="" placeholder="password" name="password" required>
+				<label class="login-field-icon fui-lock" for="login-pass"></label>
+				</div>
+ 
+                <input type="submit" value="Sign Up" class="btn btn-primary btn-large btn-block" >
+			    <br>
+			    {%if error_message%}
+			    {{error_message}}
+			    {%endif%}
+			</div>
+			</div>
+		</div>
+	</div>
+</form>
+ 
+{% endif %}
+{% endblock %}
