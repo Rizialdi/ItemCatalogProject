@@ -94,3 +94,11 @@ box-shadow: none;
   display: block;
 	margin-top: 12px;
 }
+
+.cat_des_item{
+  background-color: yellow;
+}
+
+.banner{
+  background-color: #ded1ce;
+}

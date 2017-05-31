@@ -5,21 +5,16 @@
 {% else %}
  
  
-<form action="/signup" method="POST">
-<!-- <form action="#" method="POST"> -->
+<form action="/register" method="POST">
 	<div class="login">
 		<div class="login-screen">
 			<div class="app-title">
-				<h1>Sign Up</h1>
+				<h1>Register</h1>
 			</div>
  
 			<div class="login-form">
 				<div class="control-group">
-				{%if usrname%}
-				<input type="text" class="login-field" value="{{usrname}}" placeholder="username" name="username" required>
-				{%else%}
 				<input type="text" class="login-field" value="" placeholder="username" name="username" required>
-				{%endif%}
 				<label class="login-field-icon fui-user" for="login-name"></label>
 				</div>
  
@@ -28,12 +23,11 @@
 				<label class="login-field-icon fui-lock" for="login-pass"></label>
 				</div>
  
-                <input type="submit" value="Sign Up" class="btn btn-primary btn-large btn-block" >
+                <input type="submit" value="Register" class="btn btn-primary btn-large btn-block" >
 			    <br>
 			    {%if error_message%}
 			    {{error_message}}
 			    {%endif%}
-			</div>
 			</div>
 		</div>
 	</div>

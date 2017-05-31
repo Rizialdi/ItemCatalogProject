@@ -8,6 +8,19 @@
 	</head>
 	<body>
 		<div class="container">
+		<div class="row banner">
+			<div class="col-sm-10">
+				<h1>CATALOG APP</h1>
+			</div>
+			<div class="col-sm-2">
+				{% if session['logged_in'] %}
+				<a href="/logout"><button type="submit" value="Log Out">Log Out</button></a>
+				{% else %}
+				<a href="/register"><button type="submit" value="Register">Register</button></a>
+				<a href="/signin"><button type="submit" value="Sign In">Sign In</button></a>
+				{% endif %}
+			</div>
+		</div>
 			{% block content %}
 			{% endblock %}
 		</div>

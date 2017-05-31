@@ -1,0 +1,31 @@
+{% extends "main.html" %}
+{% block content %}
+{% if session['logged_in'] %}
+
+<form action="" method="POST">
+	<label>Enter here a name:
+	<input type="text" name="name" required>
+	</label>
+	<br>
+	<label>Enter a brief description for this item:
+	<textarea name="description" maxlength="250" rows="3" required></textarea>
+	</label>
+	<br>
+	{%if categories%}
+		<label for="category_id">Category
+			 <select name="category_id">
+		{%for cat in categories%}
+				  <option value="{{cat.id}}">{{cat.name}}</option>
+		{%endfor%}
+			</select>
+		</label>
+	{%endif%}
+	<br>
+	<input type="submit" value="Add this Item">
+</form>
+
+{% else %}
+ <p>You're not logged and should not be there!</p>
+ 
+{% endif %}
+{% endblock %}
