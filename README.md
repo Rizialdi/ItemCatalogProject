@@ -51,3 +51,39 @@ Now type **python database_setup.py** to initialize the database.
 Type **python lotsofitems.py** to populate the database with category and element items. (Optional)
 
 Type **python project.py** to run the Flask web server. In your browser visit **http://localhost:5000** to view the ItemCatalogProject app.  You should be able to view, add, edit, and delete element items and categories.
+
+Some screenshot of this project are presented here:
+
+**Landing page of the web app:**
+![](https://i.imgur.com/z4MSjD8.png)
+
+**When a category is selected:**
+![](https://i.imgur.com/TDIOn1B.png)
+
+**Description of an Item:**
+![](https://i.imgur.com/JWfYCay.png)
+
+**Register Page:**
+![](https://i.imgur.com/yC6ZICp.png)
+
+**Sign In Page:**
+![](https://i.imgur.com/Bgg564I.png)
+
+**Sign In Page when wrong user/password entered:**
+![](https://i.imgur.com/Wqb9IvH.png)
+
+**Screen for registered users:**
+![](https://i.imgur.com/Y27oL1k.png)
+
+**Page for adding an Item:**
+![](https://i.imgur.com/mIqobGP.png)
+
+**Added Item listed:**
+![](https://i.imgur.com/VJDboml.png)
+
+**Logout page:**
+![](https://i.imgur.com/VRLSPvo.png)
+
+**Error when existing users' name:**
+![](https://i.imgur.com/GvJUNyC.png)
+
